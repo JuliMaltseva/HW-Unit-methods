@@ -36,18 +36,8 @@ public class Main {
         }
     }
 
-    public static void deliveryOneDay(int distanceClient, int distanceOneDay) {
-        boolean deliveryOneDay = isDeliveryOneDay(distanceClient, distanceOneDay);
-        printIsALeapYearResult(distanceClient, deliveryOneDay);
-    }
-
     public static boolean isDeliveryOneDay(int distanceClient, int distanceOneDay) {
         return distanceClient < distanceOneDay;
-    }
-
-    public static void incorrectDistance(int distanceClient) {
-        boolean incorrectDistance = isIncorrectDistance(distanceClient);
-        printIsALeapYearResult(distanceClient, incorrectDistance);
     }
 
     public static boolean isIncorrectDistance(int distanceClient) {
@@ -55,23 +45,15 @@ public class Main {
         return distanceClient < 0 || distanceClient > circumferenceOfTheEarth;
     }
 
-    public static void HowLongWillDeliveryTake(boolean deliveryOneDay, boolean incorrectDistance, int distanceClient, int distanceOneDay, int plusOneDayDeliveryIfAdded) {
+    public static void printHowLongWillDeliveryTakeResult(boolean deliveryOneDay, boolean incorrectDistance, int distanceClient, int distanceOneDay, int plusOneDayDeliveryIfAdded) {
         int day = 1;
         if (deliveryOneDay) {
             int deliveryTimeOneDay = day;
-        } else if (incorrectDistance) { // вариант кода с контролем корректности ввода расстояния
-            throw new RuntimeException("Введено некорректное расстояние.");
-        } else {
-            int deliveryTime = day + (distanceClient + distanceOneDay) / plusOneDayDeliveryIfAdded;
-        }
-    }
-
-    public static void printHowLongWillDeliveryTake(boolean deliveryOneDay, boolean incorrectDistance, int deliveryTimeOneDay, int deliveryTime) {
-        if (deliveryOneDay) {
             System.out.println("Доставка в пределах 20 км занимает " + deliveryTimeOneDay + " день.");
         } else if (incorrectDistance) { // вариант кода с контролем корректности ввода расстояния
             System.out.println("Введено некорректное расстояние.");
         } else {
+            int deliveryTime = day + (distanceClient + distanceOneDay) / plusOneDayDeliveryIfAdded;
             System.out.println("Для доставки потребуется " + deliveryTime + " дней.");
         }
     }
@@ -96,9 +78,8 @@ public class Main {
         int distanceClient = 95;
         int distanceOneDay = 20;
         int plusOneDayDeliveryIfAdded = 40;
-        int circumferenceOfTheEarth = 40_075;
 
-        printHowLongWillDeliveryTake(distanceClient, distanceOneDay, plusOneDayDeliveryIfAdded, isIncorrectDistance(circumferenceOfTheEarth));
+        printHowLongWillDeliveryTakeResult(isDeliveryOneDay(distanceClient, distanceOneDay), isIncorrectDistance(distanceClient), distanceClient, distanceOneDay, plusOneDayDeliveryIfAdded);
 
     }
 }
